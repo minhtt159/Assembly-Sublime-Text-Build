@@ -1,0 +1,14 @@
+{
+	"shell" : true,
+	"cmd": ["nasm -f macho ${file} -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com"],
+	"file_regex": "^(.+):([0-9]+)()?: error: (.*)$",
+	"working_dir": "${file_path}",
+	"selector": "source.assembly,source.asm",
+	"variants":
+	[
+		{
+			"name": "Run",
+			"cmd": ["nasm -f macho ${file} -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com && ${file_path}/./${file_base_name}"]
+		}
+	]
+}
