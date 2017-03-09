@@ -1,0 +1,5 @@
+
+#1: Install NASM: "brew install nasm"
+#2: Install NASM x86 Assembly package
+#3: Edit NASM.sublime_build with this file
+#4: Enjoy !

@@ -1,14 +1,32 @@
 {
 	"shell" : true,
-	"cmd": ["nasm -f macho ${file} -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com"],
+	"cmd": ["/usr/local/bin/nasm ${file} -f macho -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com && ${file_path}/./${file_base_name}"],
 	"file_regex": "^(.+):([0-9]+)()?: error: (.*)$",
 	"working_dir": "${file_path}",
 	"selector": "source.assembly,source.asm",
+
 	"variants":
 	[
 		{
-			"name": "Run",
-			"cmd": ["nasm -f macho ${file} -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com && ${file_path}/./${file_base_name}"]
+			"name": "Build i384",
+			"cmd": ["/usr/local/bin/nasm ${file} -f macho -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com"]
+		},
+		{
+			"name": "Run i384",
+			"cmd": ["/usr/local/bin/nasm ${file} -f macho -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com && ${file_path}/./${file_base_name}"]
+		},
+		{
+			"name": "Build x86_64",
+			"cmd": ["/usr/local/bin/nasm ${file} -f macho64 -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com"]
+		},
+		{
+			"name": "Run x86_64",
+			"cmd": ["/usr/local/bin/nasm ${file} -f macho64 -o ${file_path}/${file_base_name}.com && ld ${file_path}/${file_base_name}.com -o ${file_path}/${file_base_name} && rm ${file_path}/${file_base_name}.com && ${file_path}/./${file_base_name}"]
 		}
 	]
 }
+
+// #1: Install NASM: "brew install nasm"
+// #2: Install NASM x86 Assembly package
+// #3: Edit NASM.sublime_build with this file
+// #4: Enjoy !
